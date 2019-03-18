@@ -20,10 +20,10 @@ const {polyfillGlobal} = require('PolyfillFunctions');
 polyfillGlobal('XMLHttpRequest', () => require('XMLHttpRequest'));
 polyfillGlobal('FormData', () => require('FormData'));
 
-polyfillGlobal('fetch', () => require('fetch').fetch); // flowlint-line untyped-import:off
-polyfillGlobal('Headers', () => require('fetch').Headers); // flowlint-line untyped-import:off
-polyfillGlobal('Request', () => require('fetch').Request); // flowlint-line untyped-import:off
-polyfillGlobal('Response', () => require('fetch').Response); // flowlint-line untyped-import:off
+polyfillGlobal('fetch', () => require('fetch-ponyfill')().fetch); // flowlint-line untyped-import:off
+polyfillGlobal('Headers', () => require('fetch-ponyfill')().Headers); // flowlint-line untyped-import:off
+polyfillGlobal('Request', () => require('fetch-ponyfill')().Request); // flowlint-line untyped-import:off
+polyfillGlobal('Response', () => require('fetch-ponyfill')().Response); // flowlint-line untyped-import:off
 polyfillGlobal('WebSocket', () => require('WebSocket'));
 polyfillGlobal('Blob', () => require('Blob'));
 polyfillGlobal('File', () => require('File'));
