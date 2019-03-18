@@ -11,7 +11,7 @@
 
 'use strict';
 
-const whatwg = require('whatwg-fetch');
+const whatwg = require('cross-fetch');
 
 if (whatwg && whatwg.fetch) {
   module.exports = whatwg;

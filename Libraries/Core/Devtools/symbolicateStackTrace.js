@@ -26,17 +26,17 @@ function isSourcedFromDisk(sourcePath: string): boolean {
 async function symbolicateStackTrace(
   stack: Array<StackFrame>,
 ): Promise<Array<StackFrame>> {
-  // RN currently lazy loads whatwg-fetch using a custom fetch module, which,
-  // when called for the first time, requires and re-exports 'whatwg-fetch'.
-  // However, when a dependency of the project tries to require whatwg-fetch
-  // either directly or indirectly, whatwg-fetch is required before
-  // RN can lazy load whatwg-fetch. As whatwg-fetch checks
+  // RN currently lazy loads cross-fetch using a custom fetch module, which,
+  // when called for the first time, requires and re-exports 'cross-fetch'.
+  // However, when a dependency of the project tries to require cross-fetch
+  // either directly or indirectly, cross-fetch is required before
+  // RN can lazy load cross-fetch. As cross-fetch checks
   // for a fetch polyfill before loading, it will in turn try to load
-  // RN's fetch module, which immediately tries to import whatwg-fetch AGAIN.
+  // RN's fetch module, which immediately tries to import cross-fetch AGAIN.
   // This causes a circular require which results in RN's fetch module
   // exporting fetch as 'undefined'.
   // The fix below postpones trying to load fetch until the first call to symbolicateStackTrace.
-  // At that time, we will have either global.fetch (whatwg-fetch) or RN's fetch.
+  // At that time, we will have either global.fetch (cross-fetch) or RN's fetch.
   if (!fetch) {
     fetch = global.fetch || require('fetch').fetch;
   }
